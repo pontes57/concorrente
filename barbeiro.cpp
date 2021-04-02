@@ -7,7 +7,7 @@ using namespace std;
 
 int cont=0; //contador para as pessos que cortaram o cabelo
 int caideiras=50;//maximo de pessoas que cabe na barbearia
-int quantidade=100000;//nao posso criar milhares de threads entao cada thread vai executar esse tanto de chamadas
+int quantidade=10000;//nao posso criar milhares de threads entao cada thread vai executar esse tanto de chamadas
 int cont1=0;//contador pra quantas pessoas o barbeiro cortou o cabelo
 class mobarbeiro {
     private:
@@ -59,7 +59,7 @@ class mobarbeiro {
                 cont1++;
                 numPessoas--;
                 esperando.notify_one();
-                if(chamadas==(quantidade*100))
+                if(chamadas==(quantidade*1000))//ve se pode terminar o programa,se mudar o numero de threads tem de mudar o valor tbm
                     return;
                 barbeiroespera.wait(lck);//espera o cara sentar pra cortar o cabelo dele
             }
@@ -77,7 +77,7 @@ int main(){
     vector<thread> threads;
     thread b(barbeiro);
     threads.push_back(move(b));
-    for(int i=0;i<100;i++){
+    for(int i=0;i<1000;i++){
         thread t(cliente,i);
         threads.push_back(move(t));
     }
