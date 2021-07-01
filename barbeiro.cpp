@@ -9,7 +9,7 @@ int cont=0; //contador para as pessos que cortaram o cabelo
 int caideiras=50;//maximo de pessoas que cabe na barbearia
 int quantidade=10000;//nao posso criar milhares de threads entao cada thread vai executar esse tanto de chamadas
 int cont1=0;//contador pra quantas pessoas o barbeiro cortou o cabelo
-class mobarbeiro {
+class barbearia {
     private:
         int maxPessoas;//maximo de pessoas que cabe na barbearia         
         int numPessoas=0;//numero de pessoas dentro da barbearia
@@ -18,7 +18,7 @@ class mobarbeiro {
         condition_variable esperando,barbeiroespera;
         mutex mux;
     public:
-        mobarbeiro (int cadeiras){
+        barbearia(int cadeiras){
             maxPessoas=cadeiras;
         }
         void cliente(int id){
@@ -65,7 +65,7 @@ class mobarbeiro {
             }
         }
 };
-mobarbeiro objeto(caideiras);
+barbearia objeto(caideiras);
 void barbeiro(){
     objeto.barbeiro();
 }
